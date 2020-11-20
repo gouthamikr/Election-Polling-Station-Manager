@@ -8,7 +8,7 @@ const {
 
 const registerUser = async (req, res) => {
   try {
-    const { error } = registerValidator(req.body);
+    const { error } = registerValidator(req.query);
 
     if (error) {
       throw new Error(error.details[0].message);
