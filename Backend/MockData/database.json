@@ -1,0 +1,261 @@
+[
+  {
+    "population": 508316,
+    "city": "Karimnagar",
+    "cityType": "Metro",
+    "noOfPollingStations": 3,
+    "district": "Karimnagar",
+    "pollingStationNames": ["KARIMNAGAR", "RAMNAGAR", "RAMPUR"]
+  },
+  {
+    "population": 92557,
+    "city": "Karimnagar_Rural",
+    "cityType": "Town",
+    "noOfPollingStations": 19,
+    "district": "Karimnagar",
+    "pollingStationNames": [
+      "bommakal",
+      "MANDULAPALLI",
+      "CHEGURTHI",
+      "GOPALPUR",
+      "DURSHED",
+      "IRUKULLA",
+      "NALLAGUNTAPALLI",
+      "MOGDUMPUR",
+      "UPS TAHER KONDAPOOR",
+      "CHERLABUTHKUR",
+      "BAHADURKHANPET",
+      "CHAMANPALLI",
+      "KONDAPOOR",
+      "JUBLINAGAR",
+      "NAGUNOOR",
+      "ELABOTHARAM",
+      "WALLAMPAHAD",
+      "AREPALLI",
+      "THEEGALAGUTTAPALLI"
+    ]
+  },
+  {
+    "population": 627894,
+    "city": "Choppadhandi",
+    "cityType": "Village",
+    "noOfPollingStations": 8,
+    "district": "Karimnagar",
+    "pollingStationNames": [
+      "SARVAREDDIPALLI",
+      "NARSIMHULAPALLI",
+      "BURUGUPALLI",
+      "kondayipalli",
+      "RYALAPALLI",
+      "KACHIREDDIPALLI",
+      "VENKATAIPALLI",
+      "NARAYANAPOR"
+    ]
+  },
+  {
+    "population": 156965,
+    "city": "Manakondur",
+    "cityType": "Village",
+    "noOfPollingStations": 6,
+    "district": "Karimnagar",
+    "pollingStationNames": [
+      "LINGAPUR",
+      "Manakondur",
+      "SADASHIVAPALLI",
+      "JAGGAIAHPALLI",
+      "MUNJAMPALLI",
+      "EEDULAGATTEPALLI"
+    ]
+  },
+  {
+    "population": 891896,
+    "city": "Huzurabad",
+    "cityType": "Village",
+    "noOfPollingStations": 7,
+    "district": "Karimnagar",
+    "pollingStationNames": [
+      "POTHIREDDIPET",
+      "VENKATRAO PALLI",
+      "CHERLPUR",
+      "Indira Nagar",
+      "RAJAPALLI",
+      "SIRSAPALLI",
+      "SINGAPUR"
+    ]
+  },
+  {
+    "population": 119831,
+    "city": "Siricilla",
+    "cityType": "Town",
+    "noOfPollingStations": 6,
+    "district": "Sircilla",
+    "pollingStationNames": [
+      "Mustipally",
+      "chinnabonala",
+      "Pedda Bonala",
+      "Chandrampeta",
+      "Ragudu",
+      "pedduru"
+    ]
+  },
+  {
+    "population": 134408,
+    "city": "Vemulawada",
+    "cityType": "Village",
+    "noOfPollingStations": 10,
+    "district": "Sircilla",
+    "pollingStationNames": [
+      "Porumalla",
+      "Katlakunta",
+      "Tombaraopet",
+      "Medipally",
+      "Konda puur",
+      "VILAYATHABAD",
+      "Vallampally",
+      "Shatrajupalli",
+      "Chekkapalli",
+      "Fajulnagar"
+    ]
+  },
+  {
+    "population": 685967,
+    "city": "Musheerabad",
+    "cityType": "Town",
+    "noOfPollingStations": 8,
+    "district": "Hyderabad",
+    "pollingStationNames": [
+      "Chikkadpally",
+      "JAWAHAR NAGAR",
+      "ASHOK NAGAR",
+      "BAKARAM",
+      "Gandhi Nagar",
+      "Domalguda",
+      "LOWER TANKBUND",
+      "KAWADIGUDA"
+    ]
+  },
+  {
+    "population": 855912,
+    "city": "Secunderabad",
+    "cityType": "Metro",
+    "noOfPollingStations": 8,
+    "district": "Hyderabad",
+    "pollingStationNames": [
+      "MAHANKALI STREET",
+      "NALLAGUTTA",
+      "PENDER GHAST ROAD",
+      "PATIGADDA",
+      "begumpet",
+      "RAMGOPALPET",
+      "RANGREZ BAZAR",
+      "PAN BAZAR"
+    ]
+  },
+  {
+    "population": 565244,
+    "city": "Jubilee Hills",
+    "cityType": "Town",
+    "noOfPollingStations": 8,
+    "district": "Hyderabad",
+    "pollingStationNames": [
+      "TOLICHOWKI SLUM",
+      "Shaikpet",
+      "Suryanagar colony",
+      "Vinayaknagar",
+      "Vinobha Nagar",
+      "Maruthi Nagar",
+      "O U COLONY",
+      "AZIZ BAGH"
+    ]
+  },
+  {
+    "population": 884042,
+    "city": "Nizamabad",
+    "cityType": "Metro",
+    "noOfPollingStations": 11,
+    "district": "Nizamabad ",
+    "pollingStationNames": [
+      "S R School, R.No.1,Gangasthan",
+      "Community Hall,Gangasthan",
+      "Banjara Community Hall",
+      "GPS, Indira PriyaDharshini Colony, R.No.1",
+      "Govt. High School,Kummargally, 9th class Room",
+      "Govt. Polytechnic (Boys) LH-102 Class Room",
+      "Bapuji Vachanalayam Paper Reading Section Room",
+      "Gayathri Vidyalayam,Kotagally",
+      "gundaram",
+      "Gram Panchayat Office",
+      "MPPS 4th Class Room"
+    ]
+  },
+  {
+    "population": 953491,
+    "city": "Nizamabad_Rural",
+    "cityType": "Metro",
+    "noOfPollingStations": 12,
+    "district": "Nizamabad ",
+    "pollingStationNames": [
+      "Zilla parishad Secondary School Gundaram",
+      "gundaram",
+      "Gram Panchayat Office",
+      "MPPS 4th Class Room",
+      "ZILLA Parishad Primary School Mudakpally",
+      "ZPHS 10th Class",
+      "Bapuji Vachanalayam Paper Reading Section Room",
+      "Gayathri Vidyalayam,Kotagally",
+      "Banjara Community Hall",
+      "GPS, Indira PriyaDharshini Colony, R.No.1",
+      "Govt. High School,Kummargally, 9th class Room",
+      "Govt. Polytechnic (Boys) LH-102 Class Room"
+    ]
+  },
+  {
+    "population": 266831,
+    "city": "Armur",
+    "cityType": "Town",
+    "noOfPollingStations": 12,
+    "district": "Nizamabad ",
+    "pollingStationNames": [
+      "Bapuji Vachanalayam Paper Reading Section Room",
+      "Gayathri Vidyalayam,Kotagally",
+      "Banjara Community Hall",
+      "Zilla parishad Secondary School Gundaram",
+      "gundaram",
+      "Gram Panchayat Office",
+      "MPPS 4th Class Room",
+      "ZILLA Parishad Primary School Mudakpally",
+      "ZPHS 10th Class",
+      "GPS, Indira PriyaDharshini Colony, R.No.1",
+      "Govt. High School,Kummargally, 9th class Room",
+      "Govt. Polytechnic (Boys) LH-102 Class Room"
+    ]
+  },
+  {
+    "population": 280227,
+    "city": "Bodhan",
+    "cityType": "Village",
+    "noOfPollingStations": 19,
+    "district": "Nizamabad",
+    "pollingStationNames": [
+      "KONDAPOOR",
+      "JUBLINAGAR",
+      "NAGUNOOR",
+      "bommakal",
+      "MANDULAPALLI",
+      "IRUKULLA",
+      "MOGDUMPUR",
+      "UPS TAHER KONDAPOOR",
+      "CHERLABUTHKUR",
+      "BAHADURKHANPET",
+      "CHAMANPALLI",
+      "ELABOTHARAM",
+      "WALLAMPAHAD",
+      "AREPALLI",
+      "NALLAGUNTAPALLI",
+      "THEEGALAGUTTAPALLI",
+      "CHEGURTHI",
+      "GOPALPUR",
+      "DURSHED"
+    ]
+  }
+]
