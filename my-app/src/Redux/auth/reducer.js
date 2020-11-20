@@ -20,7 +20,6 @@ const reducers = (state = initState, { type, payload }) => {
       return { ...state, loading: true, error: false };
 
     case GET_CITY_SUCCESS:
-      console.log(payload.data);
       return {
         ...state,
         loading: false,
@@ -35,7 +34,6 @@ const reducers = (state = initState, { type, payload }) => {
       };
 
     case GET_DATA_SUCCESS:
-      console.log(payload.data);
       return {
         ...state,
         loading: false,

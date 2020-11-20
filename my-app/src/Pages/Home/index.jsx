@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardContent,
   Grid,
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "40%",
   },
   formControl: {
-    marginTop: "5%",
+    marginTop: "3%",
     margin: theme.spacing(1),
     minWidth: 200,
   },
@@ -51,25 +50,24 @@ export default function Home() {
   const [city, setCity] = useState("");
   const [sort, setSort] = useState("");
   const [data, setData] = useState([]);
-  const [finalData, setFinalData] = useState([]);
+  // const [finalData, setFinalData] = useState([]);
   const [cityType, setCityType] = useState("");
   const [search, setSearch] = useState("");
   const citiesData = useSelector((state) => state.auth.cityData);
-  const totalData = useSelector((state) => state.auth.totalData);
+  // const totalData = useSelector((state) => state.auth.totalData);
   const dispatch = useDispatch();
-  console.log(page);
+  // console.log(page);
   const handleChange = (event) => {
     setCityType(event.target.value);
   };
   const handleSortChange = (event) => {
     setSort(event.target.value);
   };
-  const handleSearch = (e) => {};
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/data")
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setData(res.data.data);
       })
       .catch((error) => {
@@ -78,31 +76,32 @@ export default function Home() {
     dispatch(getCityRequest());
     axios
       .get(
-        `http://localhost:5000/api/data?page=${page}&limit=6&population=${sort}&cityType=${cityType}`
+        `http://localhost:5000/api/data?page=${page}&limit=6&population=${sort}&cityType=${cityType}&city=${search}`
       )
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         dispatch(getCitySuccess(res.data.data));
-        setFinalData(res.data.data);
+        // setFinalData(res.data.data);
       })
       .catch((error) => {
         dispatch(getCityFailure());
       });
-  }, [page, sort, cityType]);
+  }, [page, sort, cityType, dispatch]);
 
   var pagination = [];
   var buttons = Math.ceil(data.length / 6);
   for (let i = 1; i <= buttons; i++) {
     pagination.push(i);
   }
-  console.log(
-    pagination,
-    buttons,
-    data.length,
-    sort,
-    cityType,
-    finalData.length
-  );
+  // console.log(search);
+  // console.log(
+  //   pagination,
+  //   buttons,
+  //   data.length,
+  //   sort,
+  //   cityType,
+  //   finalData.length
+  // );
   return (
     <div>
       <FormControl className={classes.formControl}>
@@ -124,24 +123,15 @@ export default function Home() {
         label="search"
         type="search"
         value={search}
-        style={{ marginTop: "4.5%", marginRight: "1%" }}
+        style={{ marginTop: "2.5%", marginRight: "1%", marginLeft: "1%" }}
         onChange={(e) => setSearch(e.target.value)}
         variant="outlined"
         required
       />
-
-      <Button
-        variant="contained"
-        style={{ marginTop: "5%" }}
-        color="secondary"
-        onClick={handleSearch}
-      >
-        Search
-      </Button>
       <Grid container>
         {citiesData &&
-          citiesData.map((item) => (
-            <Grid item xs={3} className={classes.margin}>
+          citiesData.map((item, index) => (
+            <Grid item xs={3} className={classes.margin} key={index}>
               <Card className={classes.control}>
                 <CardContent>
                   <Typography type="text" value={item.district}>
