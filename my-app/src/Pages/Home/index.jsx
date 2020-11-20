@@ -1,4 +1,11 @@
-import { Card, CardContent, Grid, Typography } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +21,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,6 +53,7 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [finalData, setFinalData] = useState([]);
   const [cityType, setCityType] = useState("");
+  const [search, setSearch] = useState("");
   const citiesData = useSelector((state) => state.auth.cityData);
   const totalData = useSelector((state) => state.auth.totalData);
   const dispatch = useDispatch();
@@ -55,6 +64,7 @@ export default function Home() {
   const handleSortChange = (event) => {
     setSort(event.target.value);
   };
+  const handleSearch = (e) => {};
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/data")
@@ -110,6 +120,24 @@ export default function Home() {
           <MenuItem value="desc">High to Low</MenuItem>
         </Select>
       </FormControl>
+      <TextField
+        label="search"
+        type="search"
+        value={search}
+        style={{ marginTop: "4.5%", marginRight: "1%" }}
+        onChange={(e) => setSearch(e.target.value)}
+        variant="outlined"
+        required
+      />
+
+      <Button
+        variant="contained"
+        style={{ marginTop: "5%" }}
+        color="secondary"
+        onClick={handleSearch}
+      >
+        Search
+      </Button>
       <Grid container>
         {citiesData &&
           citiesData.map((item) => (
@@ -124,7 +152,9 @@ export default function Home() {
                     value={city === item.city}
                     onClick={(e) => setCity(e.target.value)}
                   >
-                    City: <em>{item.city}</em>
+                    <Link to={`/${item.city}`}>
+                      City: <em>{item.city}</em>
+                    </Link>
                   </Typography>
                   <Typography>
                     City Type : <em>{item.cityType}</em>

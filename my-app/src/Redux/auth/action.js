@@ -3,6 +3,8 @@ import {
   GET_CITY_SUCCESS,
   GET_CITY_FAILURE,
   GET_DATA_SUCCESS,
+  GET_DATA_FAILURE,
+  GET_DATA_REQUEST,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -22,6 +24,15 @@ export const getCityRequest = (payload) => ({
   type: GET_CITY_REQUEST,
   payload,
 });
+export const getDataFailure = (payload) => ({
+  type: GET_DATA_FAILURE,
+  payload,
+});
+
+export const getDataRequest = (payload) => ({
+  type: GET_DATA_REQUEST,
+  payload,
+});
 export const getDataSuccess = (totalData) => ({
   type: GET_DATA_SUCCESS,
   payload: {
@@ -30,7 +41,7 @@ export const getDataSuccess = (totalData) => ({
 });
 
 export const getCity = () => (dispatch) => {
-  dispatch(getCityRequest());
+  dispatch(getDataRequest());
   axios
     .get("http://localhost:5000/api/data")
     .then((res) => {
@@ -38,6 +49,6 @@ export const getCity = () => (dispatch) => {
       dispatch(getDataSuccess(res.data.data));
     })
     .catch((error) => {
-      dispatch(getCityFailure());
+      dispatch(getDataFailure());
     });
 };
