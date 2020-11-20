@@ -1,53 +1,21 @@
 import { Card, CardContent, Grid, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { withStyles } from "@material-ui/core/styles";
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-
-const Accordion = withStyles({
-  root: {
-    boxShadow: "none",
-    "&:before": {
-      display: "none",
-    },
-    "&$expanded": {
-      margin: "auto",
-    },
-  },
-  expanded: {},
-})(MuiAccordion);
-
-const AccordionSummary = withStyles({
-  root: {
-    backgroundColor: "rgba(0, 0, 0, .03)",
-    marginBottom: -1,
-    minHeight: 56,
-    "&$expanded": {
-      minHeight: 56,
-    },
-  },
-  content: {
-    "&$expanded": {
-      margin: "12px 0",
-    },
-  },
-  expanded: {},
-})(MuiAccordionSummary);
-
-const AccordionDetails = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-    marginBottom: -1,
-    backgroundColor: "rgba(0, 0, 0, .03)",
-  },
-}))(MuiAccordionDetails);
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getCityRequest,
+  getCityFailure,
+  getCitySuccess,
+} from "../../Redux/auth/action";
+// import CityType from "../../Components/CityType";
+// import Population from "../../Components/Population";
+import axios from "axios";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
   paper: {
     height: 140,
     width: 100,
@@ -56,157 +24,145 @@ const useStyles = makeStyles((theme) => ({
     margin: "2% 4%",
   },
   control: {
-    padding: theme.spacing(1),
+    // padding: theme.spacing(1),
     backgroundColor: "rgba(0, 0, 0, .03)",
     border: "1px solid rgba(0, 0, 0, .125)",
   },
   align: {
     marginLeft: "40%",
   },
+  formControl: {
+    marginTop: "5%",
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
 }));
 export default function Home() {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState("panel1");
-
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : true);
+  const [page, setPage] = useState(1);
+  const [city, setCity] = useState("");
+  const [sort, setSort] = useState("");
+  const [data, setData] = useState([]);
+  const [finalData, setFinalData] = useState([]);
+  const [cityType, setCityType] = useState("");
+  const citiesData = useSelector((state) => state.auth.cityData);
+  const totalData = useSelector((state) => state.auth.totalData);
+  const dispatch = useDispatch();
+  console.log(page);
+  const handleChange = (event) => {
+    setCityType(event.target.value);
   };
+  const handleSortChange = (event) => {
+    setSort(event.target.value);
+  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/data")
+      .then((res) => {
+        console.log(res.data.data);
+        setData(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    dispatch(getCityRequest());
+    axios
+      .get(
+        `http://localhost:5000/api/data?page=${page}&limit=6&population=${sort}&cityType=${cityType}`
+      )
+      .then((res) => {
+        console.log(res.data.data);
+        dispatch(getCitySuccess(res.data.data));
+        setFinalData(res.data.data);
+      })
+      .catch((error) => {
+        dispatch(getCityFailure());
+      });
+  }, [page, sort, cityType]);
+
+  var pagination = [];
+  var buttons = Math.ceil(data.length / 6);
+  for (let i = 1; i <= buttons; i++) {
+    pagination.push(i);
+  }
+  console.log(
+    pagination,
+    buttons,
+    data.length,
+    sort,
+    cityType,
+    finalData.length
+  );
   return (
-    <>
-      <Grid container spacing={5} className={classes.root}>
-        <Grid item xs={3} className={classes.margin}>
-          <Card className={classes.control}>
-            <CardContent>
-              <Typography>Karimnagar</Typography>
-              <Accordion
-                square
-                expanded={expanded === "panel2"}
-                onChange={handleChange("panel2")}
-              >
-                <AccordionSummary aria-controls="panel2d-content">
-                  <Typography className={classes.align}>Cities</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel> Sort by City Type</InputLabel>
+        <Select value={cityType} onChange={handleChange}>
+          <MenuItem value="Metro">Metro</MenuItem>
+          <MenuItem value="Town">Town</MenuItem>
+          <MenuItem value="Village">Village</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel>Sort by population</InputLabel>
+        <Select value={sort} onChange={handleSortChange}>
+          <MenuItem value="asc">Low to High</MenuItem>
+          <MenuItem value="desc">High to Low</MenuItem>
+        </Select>
+      </FormControl>
+      <Grid container>
+        {citiesData &&
+          citiesData.map((item) => (
+            <Grid item xs={3} className={classes.margin}>
+              <Card className={classes.control}>
+                <CardContent>
+                  <Typography type="text" value={item.district}>
+                    District : <i>{item.district}</i>
                   </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Typography>No.of Polling Stations</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={3} className={classes.margin}>
-          <Card className={classes.control}>
-            <CardContent>
-              <Typography>Hyderabad</Typography>
-              <Accordion
-                square
-                expanded={expanded === "panel3"}
-                onChange={handleChange("panel3")}
-              >
-                <AccordionSummary aria-controls="panel2d-content">
-                  <Typography className={classes.align}>Cities</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  <Typography
+                    type="text"
+                    value={city === item.city}
+                    onClick={(e) => setCity(e.target.value)}
+                  >
+                    City: <em>{item.city}</em>
                   </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Typography>No.of Polling Stations</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={3} className={classes.margin}>
-          <Card className={classes.control}>
-            <CardContent>
-              <Typography>Nizamabad</Typography>
-              <Accordion
-                square
-                expanded={expanded === "panel4"}
-                onChange={handleChange("panel4")}
-              >
-                <AccordionSummary aria-controls="panel2d-content">
-                  <Typography className={classes.align}>Cities</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
                   <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    City Type : <em>{item.cityType}</em>
                   </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Typography>No.of Polling Stations</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={3} className={classes.margin}>
-          <Card className={classes.control}>
-            <CardContent>
-              <Typography>Rajanna Siricilla</Typography>
-              <Accordion
-                square
-                expanded={expanded === "panel5"}
-                onChange={handleChange("panel5")}
-              >
-                <AccordionSummary aria-controls="panel2d-content">
-                  <Typography className={classes.align}>Cities</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
                   <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Population : <em>{Number(item.population)}</em>
                   </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Typography>No.of Polling Stations</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={3} className={classes.margin}>
-          <Card className={classes.control}>
-            <CardContent>
-              <Typography> Jagtial</Typography>
-              <Accordion
-                square
-                expanded={expanded === "panel7"}
-                onChange={handleChange("panel7")}
-              >
-                <AccordionSummary aria-controls="panel2d-content">
-                  <Typography className={classes.align}>Cities</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
                   <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Number of polling stations : {item.noOfPollingStations}
                   </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Typography>No.of Polling Stations</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={3} className={classes.margin}>
-          <Card className={classes.control}>
-            <CardContent>
-              <Typography> Rangareddy</Typography>
-              <Accordion
-                square
-                expanded={expanded === "panel6"}
-                onChange={handleChange("panel6")}
-              >
-                <AccordionSummary aria-controls="panel2d-content">
-                  <Typography className={classes.align}>Cities</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Typography>No.of Polling Stations</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
       </Grid>
-    </>
+      <div>
+        {pagination.map((item, index) => (
+          <button
+            variant="contained"
+            color="secondary"
+            style={{
+              padding: "10px 20px",
+              margin: "10px",
+              background: "#ff3f6c",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+              outline: "none",
+              borderRadius: "5px",
+            }}
+            key={index}
+            value={item}
+            onClick={(e) => setPage(e.target.value)}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }

@@ -22,7 +22,7 @@ export default function City() {
   return (
     <>
       <FormControl className={classes.formControl}>
-        <InputLabel>Select City</InputLabel>
+        <InputLabel> Select City</InputLabel>
         <Select value={city} onChange={handleChange}>
           <MenuItem value={city}>City</MenuItem>
         </Select>

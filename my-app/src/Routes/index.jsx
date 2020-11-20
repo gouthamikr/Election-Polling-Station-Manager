@@ -8,7 +8,7 @@ import { Switch } from "react-router-dom";
 
 export default function Routes() {
   return (
-    <div style={{ marginTop: "5%" }}>
+    <div style={{ marginTop: "6%" }}>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />

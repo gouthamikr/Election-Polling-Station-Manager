@@ -10,7 +10,7 @@ export default function NavBar() {
           <Typography variant="h5" style={{ flex: 1 }}>
             Election Polling Station
           </Typography>
-          <Button variant="contained" color="info">
+          <Button variant="contained" color="default">
             Admin
           </Button>
         </Toolbar>

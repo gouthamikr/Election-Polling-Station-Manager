@@ -14,21 +14,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CityType() {
   const classes = useStyles();
-  const [cityType, setCityType] = React.useState("");
+  const [cityType1, setCityType] = React.useState("");
 
   const handleChange = (event) => {
     setCityType(event.target.value);
   };
   return (
-    <>
+    <div>
       <FormControl className={classes.formControl}>
-        <InputLabel>Sort by City Type</InputLabel>
-        <Select value={cityType} onChange={handleChange}>
+        <InputLabel> Sort by City Type</InputLabel>
+        <Select value={cityType1} onChange={handleChange}>
           <MenuItem value="Metro">Metro</MenuItem>
           <MenuItem value="Town">Town</MenuItem>
           <MenuItem value="Village">Village</MenuItem>
         </Select>
       </FormControl>
-    </>
+    </div>
   );
 }

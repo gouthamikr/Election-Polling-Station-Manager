@@ -2,6 +2,7 @@ import {
   GET_CITY_REQUEST,
   GET_CITY_SUCCESS,
   GET_CITY_FAILURE,
+  GET_DATA_SUCCESS,
 } from "./actionTypes";
 
 const initState = {
@@ -9,7 +10,7 @@ const initState = {
   token: "",
   error: false,
   errorMessage: "",
-  message: "",
+  cityData: [],
   loading: false,
 };
 
@@ -19,15 +20,27 @@ const reducers = (state = initState, { type, payload }) => {
       return { ...state, loading: true, error: false };
 
     case GET_CITY_SUCCESS:
+      console.log(payload.data);
       return {
         ...state,
         loading: false,
-        otpSend: true,
-        message: payload.message,
+        cityData: payload.data,
       };
 
     case GET_CITY_FAILURE:
-      return { ...state, loading: false, errorMessage: payload.message };
+      return {
+        ...state,
+        loading: false,
+        errorMessage: "get city request failed",
+      };
+
+    case GET_DATA_SUCCESS:
+      console.log(payload.data);
+      return {
+        ...state,
+        loading: false,
+        totalData: payload.totalData,
+      };
 
     default:
       return state;
