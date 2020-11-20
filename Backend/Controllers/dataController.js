@@ -58,4 +58,11 @@ const getData = async (req, res, next) => {
   }
 };
 
-module.exports = { getData };
+const cityData = (req, res) => {
+  console.log(req.query.id);
+  Elections.findById(req.query.id)
+    .then((response) => res.json(response))
+    .catch((err) => res.status(400).json("Error" + err));
+};
+
+module.exports = { getData, cityData };

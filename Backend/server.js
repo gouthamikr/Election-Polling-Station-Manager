@@ -5,6 +5,7 @@ const cors = require("cors");
 const Elections = require("./models/election");
 const ElectionData = require("./MockData/database.json");
 const dataRoutes = require("./Routes/dataRoutes");
+const userRoutes = require("./Routes/userRoutes");
 
 const app = express();
 
@@ -37,6 +38,7 @@ db.once("open", async (req, res) => {
 
 app.use(cors());
 app.use(express.json());
+app.use("/user", userRoutes);
 app.use("/api", dataRoutes);
 
 const port = 5000;
