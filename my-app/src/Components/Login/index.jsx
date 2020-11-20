@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import Axios from "axios";
+import { Link, Redirect } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -11,8 +13,21 @@ export default function Login() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [auth, setAuth] = useState(false);
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    Axios.get(
+      `http://localhost:5000/user/login?email=${email}&password=${password}`
+    )
+      .then((res) => {
+        console.log(res);
+        setMessage(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <form className={classes.root}>
@@ -43,6 +58,9 @@ export default function Login() {
           Login
         </Button>
       </form>
+      {auth ? { message } : <Redirect to="/" />}
+      <br />
+      <Link to="/register">wanna register</Link>
     </>
   );
 }

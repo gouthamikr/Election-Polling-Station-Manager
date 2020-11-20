@@ -86,7 +86,7 @@ export default function Home() {
       .catch((error) => {
         dispatch(getCityFailure());
       });
-  }, [page, sort, cityType, dispatch]);
+  }, [page, sort, cityType, dispatch, search]);
 
   var pagination = [];
   var buttons = Math.ceil(data.length / 6);
