@@ -2,7 +2,7 @@ const Elections = require("../models/election");
 const ElectionData = require("../MockData/database.json");
 
 const getData = async (req, res, next) => {
-  const { population, cityType } = req.query;
+  const { population, cityType, district } = req.query;
 
   const page = Number(req.query.page);
   const limit = Number(req.query.limit);
@@ -10,7 +10,7 @@ const getData = async (req, res, next) => {
   let sortByPopulation =
     population == "asc" ? 1 : population == "desc" ? -1 : 0;
 
-  if (cityType != undefined) {
+  if (cityType != undefined && district == undefined) {
     const electionDataCount = await Elections.countDocuments(
       {
         cityType: { $regex: cityType },
@@ -24,6 +24,56 @@ const getData = async (req, res, next) => {
 
     try {
       const results = await Elections.find({
+        cityType: { $regex: cityType },
+      })
+        .sort({ population: sortByPopulation })
+        .skip((page - 1) * limit)
+        .limit(limit);
+      return res
+        .status(200)
+        .send({ data: results, currentpage: page, finalPage });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).send("Something went wrong");
+    }
+  } else if (cityType == undefined && district != undefined) {
+    const electionDataCount = await Elections.countDocuments(
+      {
+        district: { $regex: district },
+      },
+      (err) => {
+        if (err) console.log(err);
+      }
+    );
+    const finalPage = Math.ceil(electionDataCount / limit);
+    try {
+      const results = await Elections.find({
+        district: { $regex: district },
+      })
+        .sort({ population: sortByPopulation })
+        .skip((page - 1) * limit)
+        .limit(limit);
+      return res
+        .status(200)
+        .send({ data: results, currentpage: page, finalPage });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).send("Something went wrong");
+    }
+  } else if (district != undefined && cityType != undefined) {
+    const electionDataCount = await Elections.countDocuments(
+      {
+        district: { $regex: district },
+        cityType: { $regex: cityType },
+      },
+      (err) => {
+        if (err) console.log(err);
+      }
+    );
+    const finalPage = Math.ceil(electionDataCount / limit);
+    try {
+      const results = await Elections.find({
+        district: { $regex: district },
         cityType: { $regex: cityType },
       })
         .sort({ population: sortByPopulation })
